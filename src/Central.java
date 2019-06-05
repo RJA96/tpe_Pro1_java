@@ -25,7 +25,7 @@ public class Central {
 	}
 	
 	public static void set_producto_sucursal(int sucursal,int producto, int cantidad, int min, int max) {
-		
+		Arr_suc[sucursal].set_producto(producto, cantidad, min, max);
 	}
 	public static void imprimir_productos_central() {
 		int j = 0;
