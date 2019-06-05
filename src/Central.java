@@ -4,13 +4,14 @@ public class Central {
 	private final static int MaxSuc = 10;
 	private int [][]Mat = new int [MaxFil][MaxCol];
 	private Sucursal []Arr_suc = new Sucursal [MaxSuc];
-	
+	private int ocupados = 0;
 	public  Central() {
 		iniciar_matriz(Mat);
 	}
 	
 	public void set_sucursal(int sucursal) {
 		Arr_suc[sucursal] = new Sucursal();
+		ocupados +=1;
 	}
 	
 	private  void iniciar_matriz(int[][]M) {
@@ -42,7 +43,7 @@ public class Central {
 	}
 	
 	public void imprimir_productos_sucursales() {
-		for (int i = 0; i < Arr_suc.length; i++) {
+		for (int i = 0; i < ocupados; i++) {
 			if (Arr_suc[i]!=null) {
 				System.out.println("Sucursal "+ i);
 				Arr_suc[i].imprimir_productos();
@@ -51,18 +52,24 @@ public class Central {
 	}
 	
 	public void proveer_sucursal (int sucursal) {
+		int aux, j;
 		for (int i = 0;i<Arr_suc[sucursal].cant_prod_faltantes();i++) {
-			if (Mat[0][Arr_suc[sucursal].producto_faltante()]>=
-					Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante())) {
-				Arr_suc[sucursal].sumar_stock_producto(Arr_suc[sucursal].producto_faltante(), Arr_suc[sucursal].producto_faltante());
-				Mat[0][Arr_suc[sucursal].producto_faltante()]-=Arr_suc[sucursal].producto_faltante();
+			if (Arr_suc[sucursal].producto_faltante()!=-1) {
+				if (Mat[0][Arr_suc[sucursal].producto_faltante()]>=
+						Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante())) {
+					aux = Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante());
+					j = Arr_suc[sucursal].producto_faltante();
+					Arr_suc[sucursal].sumar_stock_producto(j, aux);
+					Mat[0][j]-=aux;
+				}
+				else System.out.println("cantidad en central menor a la requerida");
 			}
-			else System.out.println("cantidad en central menor a la requerida");
+			else System.out.println("stock correcto");
 		}
 	}
 	
 	public void proveer_todas_sucursales () {
-		for (int i = 0; i < MaxSuc; i++) {
+		for (int i = 0; i < ocupados; i++) {
 			proveer_sucursal(i);
 		}
 	}
@@ -70,7 +77,7 @@ public class Central {
 	//para reponer hace la diferencia de si mismo con la diferencia de cada sucursal
 	public int cantidad_maxima_a_adquirir(int producto) {
 		int aux = 0;
-		for (int i = 0; i < Arr_suc.length; i++) {
+		for (int i = 0; i < ocupados; i++) {
 			aux += Arr_suc[i].get_diferencia_max_actual(producto);
 		}
 		return aux+(Mat[2][producto]-Mat[0][producto]);
