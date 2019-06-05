@@ -7,7 +7,7 @@ public class Sucursal {
 	public Sucursal(){
 		iniciar_matriz(Mat);
 	}
-	private static void iniciar_matriz(int[][]M) {
+	private void iniciar_matriz(int[][]M) {
 		for (int i = 0; i < MaxFil; i++) {
 			for (int j = 0; j < MaxCol; j++) {
 				M[i][j]=-1;
@@ -56,7 +56,6 @@ public class Sucursal {
 	}
 	public static int producto_faltante() {
 		int i = 0;
-		int j = 0;
 		boolean encontrado=false;
 		while ((i<MaxCol)||(encontrado==false)) {
 			if ((Mat[0][i]!=-1)&&(Mat[0][i]<Mat[1][i])) {
