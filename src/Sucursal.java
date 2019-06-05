@@ -35,12 +35,46 @@ public class Sucursal {
 		else System.out.println("producto incorrecto");
 	}
 	public static void vender_producto(int producto, int cantidad) {
-		if (Mat[0][producto]>0) {
-			Mat[0][producto]-=cantidad;
+		if (Mat[0][producto]!=-1) {
+			if (Mat[0][producto]>0) {
+				Mat[0][producto]-=cantidad;
+			}
+			else {
+				System.out.println("cantidad insuficiente");
+			}
 		}
-		else {
-			System.out.println("cantidad insuficiente");
+		else System.out.println("producto no trabajado por esta sucursal");
+	}
+	public static int cant_prod_faltantes() {
+		int aux = 0;
+		for (int i = 0; i < MaxCol; i++) {
+			if ((Mat[0][i]!=-1)&&(Mat[0][i]<Mat[1][i])) {
+				aux++;
+			}
 		}
+		return aux;
+	}
+	public static int producto_faltante() {
+		int i = 0;
+		int j = 0;
+		boolean encontrado=false;
+		while ((i<MaxCol)||(encontrado==false)) {
+			if ((Mat[0][i]!=-1)&&(Mat[0][i]<Mat[1][i])) {
+				encontrado = true;
+			}
+			else i++;
+		}
+		if (i<MaxCol) {
+			return i;
+		}
+		else return -1;
 	}
 	
+	public static int cantidad_faltante(int producto) {
+		return ((Mat[2][producto]-Mat[1][producto])/2)-Mat[0][producto];
+	}
+	
+	 public static void sumar_stock_producto (int producto, int cantidad) {
+		 Mat[0][producto]+= cantidad;
+	 }
 }

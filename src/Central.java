@@ -42,4 +42,20 @@ public class Central {
 		}
 	}
 	
+	public static void proveer_sucursal (int sucursal) {
+		for (int i = 0;i<Arr_suc[sucursal].cant_prod_faltantes();i++) {
+			if (Mat[0][Arr_suc[sucursal].producto_faltante()]>=
+					Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante())) {
+				Arr_suc[sucursal].sumar_stock_producto(Arr_suc[sucursal].producto_faltante(), Arr_suc[sucursal].producto_faltante());
+				Mat[0][Arr_suc[sucursal].producto_faltante()]-=Arr_suc[sucursal].producto_faltante();
+			}
+			else System.out.println("cantidad en central menor a la requerida");
+		}
+	}
+	
+	public static void proveer_todas_sucursales () {
+		for (int i = 0; i < MaxSuc; i++) {
+			proveer_sucursal(i);
+		}
+	}
 }
