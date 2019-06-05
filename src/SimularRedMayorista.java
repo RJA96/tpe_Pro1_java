@@ -12,6 +12,7 @@ public class SimularRedMayorista {
 		c1.set_sucursal(1);
 		c1.set_sucursal(2);
 		c1.set_producto_sucursal(0, 0, 20, 10, 30);
+		c1.set_producto_sucursal(2, 2, 20, 10, 30);
 		c1.set_producto_sucursal(1, 0, 20, 10, 30);
 		c1.set_producto_sucursal(3, 0, 30, 10, 79);
 		c1.imprimir_productos_sucursales();

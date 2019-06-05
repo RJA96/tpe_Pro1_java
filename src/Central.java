@@ -44,8 +44,8 @@ public class Central {
 	public void imprimir_productos_sucursales() {
 		for (int i = 0; i < Arr_suc.length; i++) {
 			if (Arr_suc[i]!=null) {
-			System.out.println("Sucursal "+ i);
-			Arr_suc[i].imprimir_productos();
+				System.out.println("Sucursal "+ i);
+				Arr_suc[i].imprimir_productos();
 			}
 		}
 	}
