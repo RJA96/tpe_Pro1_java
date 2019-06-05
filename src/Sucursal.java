@@ -77,4 +77,11 @@ public class Sucursal {
 	 public static void sumar_stock_producto (int producto, int cantidad) {
 		 Mat[0][producto]+= cantidad;
 	 }
+	 
+	 public static int get_diferencia_max_actual(int producto) {
+		 if (Mat[0][producto]!=-1) {
+			 return Mat[2][producto]-Mat[0][producto];
+		 }
+		 else return 0;
+	 }
 }

@@ -4,8 +4,15 @@ public class Central {
 	private final static int MaxSuc = 10;
 	private static int [][]Mat = new int [MaxFil][MaxCol];
 	private static Sucursal []Arr_suc = new Sucursal [MaxSuc];
+	private static int pos_ocupadas_sucursales;
 	public  Central() {
 		iniciar_matriz(Mat);
+		pos_ocupadas_sucursales= 0;
+	}
+	
+	public static void set_sucursal() {
+		Arr_suc[pos_ocupadas_sucursales] = new Sucursal();
+		pos_ocupadas_sucursales +=1;
 	}
 	
 	private static void iniciar_matriz(int[][]M) {
@@ -57,5 +64,14 @@ public class Central {
 		for (int i = 0; i < MaxSuc; i++) {
 			proveer_sucursal(i);
 		}
+	}
+	
+	//para reponer hace la diferencia de si mismo con la diferencia de cada sucursal
+	public static int cantidad_maxima_a_adquirir(int producto) {
+		int aux = 0;
+		for (int i = 0; i < pos_ocupadas_sucursales; i++) {
+			aux += Arr_suc[i].get_diferencia_max_actual(producto);
+		}
+		return aux+(Mat[2][producto]-Mat[0][producto]);
 	}
 }
