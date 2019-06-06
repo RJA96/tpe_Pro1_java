@@ -101,8 +101,13 @@ public class Central {
 		}
 	}
 	
+	//imprime la cantidad recomendada a adquirir
+	public void compra_recomendada_producto(int prod) {
+		System.out.println(cantidad_maxima_a_adquirir(prod));
+	}
+	
 	//para reponer hace la diferencia de si mismo con la diferencia de cada sucursal
-	public int cantidad_maxima_a_adquirir(int producto) {
+	private int cantidad_maxima_a_adquirir(int producto) {
 		int aux = 0;
 		for (int i = 0; i < ocupados; i++) {
 			aux += Arr_suc[i].get_diferencia_max_actual(producto);

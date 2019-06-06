@@ -15,7 +15,7 @@ public class SimularRedMayorista {
 		c1.set_producto_sucursal(0, 0, 20, 10, 30);
 		c1.set_producto_sucursal(2, 2, 5, 10, 40);
 		c1.set_producto_sucursal(1, 0, 4, 10, 30);
-		System.out.println(c1.cantidad_maxima_a_adquirir(2));
+		c1.compra_recomendada_producto(2);
 		c1.proveer_sucursal(1);
 		c1.vender_producto_sucursal(0, 0, 10);
 		c1.proveer_todas_sucursales();
