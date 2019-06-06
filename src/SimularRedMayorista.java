@@ -20,6 +20,7 @@ public class SimularRedMayorista {
 		c1.vender_producto_sucursal(0, 0, 10);
 		c1.proveer_todas_sucursales();
 		c1.vender_producto_sucursal(0, 0, 10);
+		c1.vender_producto_sucursal(0, 0, 10); //le pido 10 mas pero no los tiene
 		c1.imprimir_productos_sucursales();
 		c1.imprimir_productos_central();
 	}
