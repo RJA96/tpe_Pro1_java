@@ -5,15 +5,19 @@ public class Central {
 	private int [][]Mat = new int [MaxFil][MaxCol];
 	private Sucursal []Arr_suc = new Sucursal [MaxSuc];
 	private int ocupados = 0;
+	
+	//constructor de central
 	public  Central() {
 		iniciar_matriz(Mat);
 	}
 	
+	//crea la instancia de sucursal en el arreglo
 	public void set_sucursal(int sucursal) {
 		Arr_suc[sucursal] = new Sucursal();
 		ocupados +=1;
 	}
 	
+	//inicia la matriz en 0
 	private  void iniciar_matriz(int[][]M) {
 		for (int i = 0; i < MaxFil; i++) {
 			for (int j = 0; j < MaxCol; j++) {
@@ -22,6 +26,7 @@ public class Central {
 		}
 	}
 	
+	//setea un producto en la Matriz de la sentral
 	public void set_producto(int producto, int cantidad, int min, int max) {
 		if (producto<MaxCol) {
 			Mat[0][producto]=cantidad;
@@ -30,9 +35,16 @@ public class Central {
 		}	
 	}
 	
+	//setea un producto a una sucursal determinada
 	public void set_producto_sucursal(int sucursal,int producto, int cantidad, int min, int max) {
-		Arr_suc[sucursal].set_producto(producto, cantidad, min, max);
+		if (sucursal<ocupados) {
+			Arr_suc[sucursal].set_producto(producto, cantidad, min, max);
+		}
+		else System.out.println("la sucursal no existe");
+		
 	}
+	
+	//imprime la matriz de la central
 	public void imprimir_productos_central() {
 		int j = 0;
 		System.out.println("Central");
@@ -42,6 +54,7 @@ public class Central {
 		}
 	}
 	
+	//imprime los productos de todas las sucursales
 	public void imprimir_productos_sucursales() {
 		for (int i = 0; i < ocupados; i++) {
 			if (Arr_suc[i]!=null) {
@@ -50,15 +63,14 @@ public class Central {
 			}
 		}
 	}
-	
+	//provee de productos faltantes a una sucursal si es que 
 	public void proveer_sucursal (int sucursal) {
 		int aux, j;
 		for (int i = 0;i<Arr_suc[sucursal].cant_prod_faltantes();i++) {
 			if (Arr_suc[sucursal].producto_faltante()!=-1) {
-				if (Mat[0][Arr_suc[sucursal].producto_faltante()]>=
-						Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante())) {
-					aux = Arr_suc[sucursal].cantidad_faltante(Arr_suc[sucursal].producto_faltante());
-					j = Arr_suc[sucursal].producto_faltante();
+				j = Arr_suc[sucursal].producto_faltante();
+				aux = Arr_suc[sucursal].cantidad_faltante(j);
+				if (Mat[0][j]>=aux) {
 					Arr_suc[sucursal].sumar_stock_producto(j, aux);
 					Mat[0][j]-=aux;
 				}
@@ -68,6 +80,7 @@ public class Central {
 		}
 	}
 	
+	//provee los productos que todas las sucursales existentes necesitan
 	public void proveer_todas_sucursales () {
 		for (int i = 0; i < ocupados; i++) {
 			proveer_sucursal(i);
