@@ -1,7 +1,10 @@
 
 public class Sucursal {
+	//declaracion de constantes
 	private final static int MaxCol = 5;
 	private final static int MaxFil = 3;
+	
+	//declaracion de variables
 	private  int [][]Mat = new int [MaxFil][MaxCol];
 	
 	//constructor sucursal
@@ -40,9 +43,9 @@ public class Sucursal {
 		else System.out.println("producto incorrecto");
 	}
 	
-	//vende el poducto si esta sucursal lo travbaja y si tiene en disponible
+	//vende el poducto si esta sucursal lo trabaja y si tiene en disponible
 	public  void vender_producto(int producto, int cantidad) {
-		if (Mat[0][producto]!=-1) {
+		if ((producto<MaxCol)&&(Mat[0][producto]!=-1)) {
 			if (Mat[0][producto]>0) {
 				Mat[0][producto]-=cantidad;
 			}
@@ -82,19 +85,35 @@ public class Sucursal {
 	
 	//devuelve la cantidad de productos faltantes
 	public  int cantidad_faltante(int producto) {
-		return ((Mat[2][producto]-Mat[1][producto])/2)-Mat[0][producto];
+		if (producto<MaxCol) {
+			return ((Mat[2][producto]-Mat[1][producto])/2)-Mat[0][producto];
+		}
+		else return 0;
 	}
 	
 	//suma al stock acutal en la matriz de dicho producto la cantidad ingresada
 	public  void sumar_stock_producto (int producto, int cantidad) {
-		Mat[0][producto]+= cantidad;
+		if (producto<MaxCol) {
+			if (Mat[0][producto]!=-1) {
+				Mat[0][producto]+= cantidad;	
+			}
+			else System.out.println("este producto no es trabajado");
+		}
+		else System.out.println("producto erroneo");
+		
 	}
 	
 	//devuelve la diferencia entre la cantidad maxima y la minima, si no trabaja dicho producto devuelve 0
 	public  int get_diferencia_max_actual(int producto) {
-		if (Mat[0][producto]!=-1) {
-			 return Mat[2][producto]-Mat[0][producto];
+		if (producto<MaxCol) {
+			if (Mat[0][producto]!=-1) {
+				 return Mat[2][producto]-Mat[0][producto];
+			}
+			else return 0;
 		}
-		else return 0;
+		else {
+			return 0;
+		}
+		
 	 }
 }

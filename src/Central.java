@@ -1,7 +1,10 @@
 public class Central {
+	//declaracion de constantes
 	private final static int MaxCol = 5;
 	private final static int MaxFil = 3;
 	private final static int MaxSuc = 10;
+	
+	//declaracion de variables
 	private int [][]Mat = new int [MaxFil][MaxCol];
 	private Sucursal []Arr_suc = new Sucursal [MaxSuc];
 	private int ocupados = 0;
@@ -12,9 +15,12 @@ public class Central {
 	}
 	
 	//crea la instancia de sucursal en el arreglo
-	public void set_sucursal(int sucursal) {
-		Arr_suc[sucursal] = new Sucursal();
-		ocupados +=1;
+	public void set_sucursal(int sucursal){
+		if ((sucursal< MaxSuc)&&(Arr_suc[sucursal]==null)) {
+			Arr_suc[sucursal] = new Sucursal();
+			ocupados +=1;
+		}
+		
 	}
 	
 	//inicia la matriz en 0
@@ -78,6 +84,14 @@ public class Central {
 			}
 			else System.out.println("stock correcto");
 		}
+	}
+	
+	//vende productos de una sucursal dada
+	public void vender_producto_sucursal(int suc, int prod, int cant) {
+		if (suc<ocupados) {
+			Arr_suc[suc].vender_producto(prod, cant);
+		}
+		else System.out.println("la sucursal no existe");
 	}
 	
 	//provee los productos que todas las sucursales existentes necesitan
